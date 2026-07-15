@@ -12,7 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import RfqsPage from './pages/RfqsPage';
 import QuotationsPage from './pages/QuotationsPage';
 import PurchaseOrdersPage from './pages/PurchaseOrdersPage';
-import RaiseInvoicePage from './pages/RaiseInvoicePage';
+import CreateAsnPage from './pages/CreateAsnPage';
 import DeliveriesPage from './pages/DeliveriesPage';
 import ReturnsPage from './pages/ReturnsPage';
 import InvoicesPage from './pages/InvoicesPage';
@@ -41,7 +41,7 @@ export default function App() {
               <Route path="/rfqs" element={<RfqsPage />} />
               <Route path="/quotations" element={<QuotationsPage />} />
               <Route path="/purchase-orders" element={<PurchaseOrdersPage />} />
-              <Route path="/raise-invoice" element={<RaiseInvoicePage />} />
+              <Route path="/create-asn" element={<CreateAsnPage />} />
               <Route path="/deliveries" element={<DeliveriesPage />} />
               <Route path="/returns" element={<ReturnsPage />} />
               <Route path="/invoices" element={<InvoicesPage />} />

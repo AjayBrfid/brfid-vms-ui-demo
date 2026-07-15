@@ -32,6 +32,12 @@ const STATS_CONFIG = [
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><circle cx="12" cy="12" r="10" /><line x1="15" y1="9" x2="9" y2="15" /><line x1="9" y1="9" x2="15" y2="15" /></svg>
     ),
   },
+  {
+    label: 'ASN Submitted', color: 'var(--success)', bg: 'var(--success-bg)',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75"><rect x="1" y="3" width="15" height="13" rx="1" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+    ),
+  },
 ];
 
 const thStyle = { padding: '10px 12px', textAlign: 'left', fontSize: 12, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.5px' };
@@ -217,7 +223,7 @@ export default function PurchaseOrdersPage() {
           <button className="btn btn-secondary" onClick={modal.close}>Close</button>
           <button className="btn btn-primary" onClick={() => toast('Download', 'PO PDF downloaded.', 'success')}>Download PDF</button>
           {p.status === 'Accepted' ? (
-            <button className="btn btn-primary" onClick={() => { modal.close(); navigate(`/raise-invoice?po=${p.id}`); }}>Raise Invoice</button>
+            <button className="btn btn-primary" onClick={() => { modal.close(); navigate(`/create-asn?po=${p.id}`); }}>Create ASN</button>
           ) : null}
           {p.status === 'Pending' ? (
             <>
@@ -289,17 +295,17 @@ export default function PurchaseOrdersPage() {
     });
   }
 
-  function invoiceCol(r) {
+  function asnCol(r) {
     const enabled = r.status === 'Accepted';
     return (
       <button
         className="btn btn-sm btn-primary"
         disabled={!enabled}
-        title={enabled ? '' : 'Available once the PO is approved'}
-        onClick={(e) => { e.stopPropagation(); if (enabled) navigate(`/raise-invoice?po=${r.id}`); }}
+        title={enabled ? '' : (r.status === 'ASN Submitted' ? 'ASN already submitted for this PO' : 'Available once the PO is approved')}
+        onClick={(e) => { e.stopPropagation(); if (enabled) navigate(`/create-asn?po=${r.id}`); }}
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="15" y2="15" /></svg>
-        Raise Invoice
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="13" height="13"><rect x="1" y="3" width="15" height="13" rx="1" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>
+        Create ASN
       </button>
     );
   }
@@ -335,7 +341,7 @@ export default function PurchaseOrdersPage() {
     { key: 'grandTotal', label: 'Grand Total', render: r => <strong>{rupees(r.grandTotal)}</strong> },
     { key: 'deliveryDate', label: 'Delivery Date' },
     { key: 'status', label: 'Status', render: r => <Badge>{r.status}</Badge> },
-    { key: '_invoice', label: 'Invoice', render: invoiceCol },
+    { key: '_asn', label: 'ASN', render: asnCol },
     { key: '_actions', label: 'Actions', render: actionsCol },
   ];
 
@@ -378,6 +384,7 @@ export default function PurchaseOrdersPage() {
               <option>Pending</option>
               <option>Accepted</option>
               <option>Rejected</option>
+              <option>ASN Submitted</option>
             </select>
           </div>
           <div className="table-spacer"></div>

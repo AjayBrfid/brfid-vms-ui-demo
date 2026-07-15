@@ -10,6 +10,7 @@ export const SK = {
   PAYMENTS: 'vms_payments',
   GOODS: 'vms_goods',
   REG_GOODS_DRAFT: 'vms_reg_goods_draft',
+  ASN: 'vms_asn',
   CATALOG: 'vms_catalog',
   NOTIFS: 'vms_notifications',
   SESSION: 'vms_session',

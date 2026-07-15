@@ -31,6 +31,7 @@ const STATUS_MAP = {
   Initiated: 'gray', Received: 'info', Refunded: 'success',
   'In Stock': 'success', 'Low Stock': 'warning', 'No Stock': 'danger',
   'SKU Assigned': 'success',
+  'ASN Submitted': 'success', Draft: 'gray',
 };
 
 export function getStatus(s) {

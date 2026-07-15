@@ -112,10 +112,6 @@ export default function RegisterPage() {
             <div className="reg-logo-icon">
               <img src={logo} alt="BRFID" />
             </div>
-            <div>
-              <h1 style={{ fontSize: 22, color: 'var(--text-dark)' }}>VMS Vendor Portal</h1>
-              <div style={{ fontSize: 13, color: 'var(--text-secondary)' }}>Central Warehouse Procurement System</div>
-            </div>
           </div>
           <h2 style={{ fontSize: 18, marginBottom: 4 }}>New Vendor Registration</h2>
           <p>Fill in the details below. Our procurement team will review and approve your registration.</p>
